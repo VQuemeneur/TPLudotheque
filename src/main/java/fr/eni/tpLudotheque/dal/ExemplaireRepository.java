@@ -11,6 +11,6 @@ public interface ExemplaireRepository {
 
 	void update(Exemplaire exemplaire);
 
-	boolean isCodebarreUnique(Exemplaire exemplaire);
+//	boolean isCodebarreUnique(Exemplaire exemplaire);
 
 }

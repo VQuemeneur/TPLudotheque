@@ -14,7 +14,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.eni.ludotheque.exceptions.CodebarreDejaExistantException;
 import fr.eni.tpLudotheque.bo.Exemplaire;
 import fr.eni.tpLudotheque.exceptions.CodeBarreDejaExistantException;
 
@@ -48,20 +47,20 @@ public class ExemplaireRepositoryImpl implements ExemplaireRepository {
 	@Override
 
 	public void ajouterExemplaire(Exemplaire exemplaire) throws CodeBarreDejaExistantException{
-		logger.debug("avant insert into exemplaire...");
-		System.out.println(exemplaire.getJeu().getNumeroJeu());
-
-		// codeExiste = isCodebarreUnique(exemplaire);
-		try {
 		String sql = "INSERT INTO exemplaire (codebarre, louable, numeroJeu) VALUES(:codebarre, :louable, :jeu.numeroJeu)";
 
-		int rows = namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(exemplaire));
+		//int rows = namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(exemplaire));
 
-		System.out.println(rows);
+		//String sql = "INSERT INTO exemplaire (codebarre, louable, numeroJeu) VALUES (?, ?, ?) ";
+		try {
+		namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(exemplaire));
+	//jdbcTemplate.update(sql,  exemplaire.getCodebarre(), exemplaire.isLouable(), exemplaire.getNumeroJeu());
 		}catch(DuplicateKeyException duplicateKeyException) {
 			throw new CodeBarreDejaExistantException(duplicateKeyException);
 		}
 	}
+
+	
 
 	@Override
 	public Exemplaire findById(int numeroExemplaire) {
@@ -80,18 +79,6 @@ public class ExemplaireRepositoryImpl implements ExemplaireRepository {
 				exemplaire.getJeu().getNumeroJeu(), exemplaire.getNumeroExemplaire());
 
 	}
-
-	public boolean isCodebarreUnique(Exemplaire exemplaire) {
-		// Requête SQL pour vérifier si le codebarre existe déjà dans la base de données
-		String checkSql = "SELECT COUNT(*) FROM exemplaire WHERE codebarre = ?";
-
-		// Exécution de la requête avec le codebarre de l'exemplaire
-		int count = jdbcTemplate.queryForObject(checkSql, Integer.class, exemplaire.getCodebarre());
-		if (count > 0) {
-			return false;
-		}
-		return true;
-
-	}
+	
 
 }

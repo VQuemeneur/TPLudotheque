@@ -11,18 +11,15 @@
 	</div>
 	
 	    <!-- Affichage des messages globaux -->
-    <div th:if="${codebarreError}" style="color: red;">
-        <p th:text="${codebarreError}"></p>
-    </div>
+   
+    <span th:text="${erreur}" style="color:red"></span>
 	<form th:action="@{/jeu/{numeroJeu}/ajouterExemplaire(numeroJeu=${numeroJeu})}"
 	 method="post"
 		th:object="${exemplaire}">
 		<div>
 			<label for="codebarre">Code Barre : </label> <input type="text"
 				th:field="*{codebarre}" id="codebarre">
-				  <span style="color: red;" th:if="${#fields.hasErrors('codebarre')}" th:errors="*{codebarre}">
-                Erreur dans le code-barre
-            </span>
+				 
 		</div>
 		<br>
 		<div>

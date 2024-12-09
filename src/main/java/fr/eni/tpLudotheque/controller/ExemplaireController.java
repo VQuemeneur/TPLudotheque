@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import fr.eni.tpLudotheque.bo.Client;
 import fr.eni.tpLudotheque.bo.Exemplaire;
 import fr.eni.tpLudotheque.bo.Jeu;
+import fr.eni.tpLudotheque.exceptions.CodeBarreDejaExistantException;
 import fr.eni.tpLudotheque.services.ExemplaireService;
 import jakarta.validation.Valid;
 
@@ -43,24 +44,22 @@ public class ExemplaireController {
 	public String ajouterExemplaire(@PathVariable("numeroJeu") int numeroJeu, @Valid Exemplaire exemplaire,
 			BindingResult resultat, Model modele, RedirectAttributes redirectAttr) {
 		
-	    // Vérification des erreurs de validation
-	    if (resultat.hasErrors()) {
-	        modele.addAttribute("org.springframework.validation.BindingResult.exemplaire", resultat);
-	        modele.addAttribute("exemplaire", exemplaire);
-	        return "ajoutExemplaire";
-	    }
-
-	    // Vérification de l'unicité du code-barre
-	    if (!(exemplaireService.codebarreValide(exemplaire)== exemplaire.getCodebarre())) {
-	        modele.addAttribute("codebarreError", "Le code-barre " + exemplaire.getCodebarre()
-	                + " est déjà utilisé. Veuillez en choisir un autre.");
-	        return "ajoutExemplaire";
-	    }
-
+		// Vérification des erreurs de validation
+		if (resultat.hasErrors()) {
+			modele.addAttribute("org.springframework.validation.BindingResult.exemplaire", resultat);
+			modele.addAttribute("exemplaire", exemplaire);
+			return "ajoutExemplaire";
+		}		
+		try {
+			exemplaireService.ajouterExemplaire(exemplaire);
+		} catch (CodeBarreDejaExistantException e) {
+			redirectAttr.addFlashAttribute("erreur", "codebarre déjà existant");
+			return "ajoutExemplaire";
+		}
 		System.out.println("exemplaire ajouté " + exemplaire.toString());
-		exemplaireService.ajouterExemplaire(exemplaire);
-		return "redirect:/jeu/{numeroJeu}";
+		return "redirect:/jeu/" + exemplaire.getNumeroJeu();
 
+		
 	}
 
 	@GetMapping("/jeu/{numeroJeu}/{numeroExemplaire}")
