@@ -58,7 +58,6 @@ public class ExemplaireController {
 		}
 		System.out.println("exemplaire ajouté " + exemplaire.toString());
 		return "redirect:/jeu/" + exemplaire.getNumeroJeu();
-
 		
 	}
 

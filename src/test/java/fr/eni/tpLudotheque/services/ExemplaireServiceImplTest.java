@@ -21,6 +21,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import fr.eni.tpLudotheque.bo.Exemplaire;
 import fr.eni.tpLudotheque.bo.Jeu;
 import fr.eni.tpLudotheque.dal.ExemplaireRepository;
+import fr.eni.tpLudotheque.exceptions.CodeBarreDejaExistantException;
 
 @SpringBootTest
 public class ExemplaireServiceImplTest {
@@ -32,7 +33,7 @@ public class ExemplaireServiceImplTest {
 	private ExemplaireService exemplaireService;
 	
 	@Test
-	  public void testAjoutExemplaireOk()  {
+	  public void testAjoutExemplaireOk() throws CodeBarreDejaExistantException  {
         // Arrange    	
     	Jeu jeu = new Jeu();
     	jeu.setNumeroJeu(1);
@@ -43,7 +44,7 @@ public class ExemplaireServiceImplTest {
         exemplaire.setJeu(jeu);
     	
         //Act 
-    	//exemplaireService.ajouterExemplaire(exemplaire);   
+    	exemplaireService.ajouterExemplaire(exemplaire);   
     	
     	//Assert
         assertNotNull(exemplaire, "L'exemplaire ne doit pas être null");
@@ -52,12 +53,12 @@ public class ExemplaireServiceImplTest {
         assertEquals(jeu, exemplaire.getJeu(), "Le jeu doit correspondre");
         
         // Vérification que le repository a bien été appelé une fois
-       // verify(exemplaireRepository, times(1)).ajouterExemplaire(any(Exemplaire.class));
+       verify(exemplaireRepository, times(1)).ajouterExemplaire(any(Exemplaire.class));
 
 }
 	
 	@Test
-	public void testAjoutExemplaireCodeBarreKO() {
+	public void testAjoutExemplaireCodeBarreKO() throws CodeBarreDejaExistantException {
 		 // Arrange    	
     	Jeu jeu = new Jeu();
     	jeu.setNumeroJeu(23);
@@ -71,8 +72,8 @@ public class ExemplaireServiceImplTest {
         exemplaire.setJeu(jeu);
         
         //Act
-      //  exemplaireService.ajouterExemplaire(exemplaire);
-       // exemplaireService.ajouterExemplaire(exemplaire2);
+        exemplaireService.ajouterExemplaire(exemplaire);
+        exemplaireService.ajouterExemplaire(exemplaire2);
         
         //Assert
         assertNotNull(exemplaire.getNumeroExemplaire(), "L'exemplaire doit être sauvegardé avec un numéro généré");
