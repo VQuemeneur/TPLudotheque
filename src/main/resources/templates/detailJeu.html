@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${'Détail du jeu '+jeu.titre}"> </title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Titre :</th>
+        <td th:text="${jeu.titre}"></td>
+    </tr>
+    <tr>
+        <th>Référence :</th>
+        <td th:text="${jeu.reference}"></td>
+    </tr>
+    <tr>
+        <th>Description :</th>
+        <td th:text="${jeu.description}"></td>
+    </tr>
+    <tr>
+        <th>Tarif à la journée (€):</th>
+        <td th:text="${jeu.tarifJournee}"></td>
+    </tr>
+    <tr>
+        <th>Age mini :</th>
+        <td th:text="${jeu.ageMin}"></td>
+    </tr>
+    <tr>
+        <th>Durée (minutes) :</th>
+        <td th:text="${jeu.duree}"></td>
+    </tr>
+     <tr>
+        <th>Genres:</th>
+        <td>
+        <ul>
+            <li th:each="genre : ${jeu.genres}" th:text="${genre.libelle}"></li>
+        </ul>
+    </td>
+     <tr>
+        <th>Exemplaires:</th>
+        <td>
+        <ul>
+    <li th:each="exemplaire : ${jeu.exemplaires}">
+     <a th:href="@{/jeu/{numeroJeu}/{numeroExemplaire}(numeroJeu=${jeu.numeroJeu}, numeroExemplaire=${exemplaire.numeroExemplaire})}">
+        <span th:text="'Exemplaire ' + ${exemplaire.numeroExemplaire} + '  '"></span>
+    </a>
+        <span th:if="${exemplaire.louable}" style="color: green;">Disponible</span>
+        <span th:if="${!exemplaire.louable}" style="color: red;">Non disponible</span>
+    </li>
+</ul>
+    </td>
+    </tr>
+    
+</table>
+<button><a th:href="@{/jeu}" class="btn">Accueil Jeux</a></button> 
+
+<button> <a th:href="@{/jeu/modifier/{numeroJeu}(numeroJeu=${jeu.numeroJeu})}" class="btn">Modifier</a></button>
+
+<button> <a th:href="@{/jeu/{numeroJeu}/ajouterExemplaire(numeroJeu=${jeu.numeroJeu})}" class="btn">Ajouter un exemplaire</a></button>
+
+<button>Supprimer</button>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajout d'un exemplaire</title>
+</head>
+<body>
+	<h1>La crypte du jeu</h1>
+	<div>
+		<h2>Formulaire d'ajout d'exemplaire de jeu</h2>
+	</div>
+	
+	    <!-- Affichage des messages globaux -->
+    <div th:if="${codebarreError}" style="color: red;">
+        <p th:text="${codebarreError}"></p>
+    </div>
+	<form th:action="@{/jeu/{numeroJeu}/ajouterExemplaire(numeroJeu=${numeroJeu})}"
+	 method="post"
+		th:object="${exemplaire}">
+		<div>
+			<label for="codebarre">Code Barre : </label> <input type="text"
+				th:field="*{codebarre}" id="codebarre">
+				  <span style="color: red;" th:if="${#fields.hasErrors('codebarre')}" th:errors="*{codebarre}">
+                Erreur dans le code-barre
+            </span>
+		</div>
+		<br>
+		<div>
+
+			<label for="louable">Disponibilité :</label><br> <input
+				type="radio" id="louable-oui" name="louable" th:field="*{louable}"
+				value="true" /> <label for="louable-oui">Oui</label> <input
+				type="radio" id="louable-non" name="louable" th:field="*{louable}"
+				value="false" /> <label for="louable-non">Non</label>
+		</div>
+		<br>
+		
+
+
+		<button>Valider</button>
+	</form>
+</body>
+</html>

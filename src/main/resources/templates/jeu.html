@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Liste des jeux</title>
+</head>
+<body>
+	<div>
+		<h2>Liste des jeux</h2>
+		<table>
+<th>Titre</th><th>Durée</th>
+			<tr th:each="jeu : ${jeux}">
+			
+				<td><a
+					th:href="@{/jeu/{numeroJeu}(numeroJeu=${jeu.numeroJeu})}"
+					th:text="${jeu.titre}"></a></td>
+						
+				<td th:text="${jeu.duree}"></td>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<button>
+		<a th:href="@{/jeu/creer}" class="btn">Nouveau jeu</a>
+	</button>
+</body>
+</html>

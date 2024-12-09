@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Détail du Client</title>
+</head>
+<body>
+<h1>Détail du client</h1>
+<table>
+    <tr>
+        <th>Nom</th>
+        <td th:text="${client.nom}"></td>
+    </tr>
+    <tr>
+        <th>Prénom</th>
+        <td th:text="${client.prenom}"></td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td th:text="${client.email}"></td>
+    </tr>
+    <tr>
+        <th>Téléphone</th>
+        <td th:text="${client.telephone}"></td>
+    </tr>
+    <tr>
+        <th>Rue</th>
+        <td th:text="${client.rue}"></td>
+    </tr>
+    <tr>
+        <th>Code Postal</th>
+        <td th:text="${client.codePostal}"></td>
+    </tr>
+    <tr>
+        <th>Ville</th>
+        <td th:text="${client.ville}"></td>
+    </tr>
+</table>
+<button><a th:href="@{/}" class="btn">Accueil</a></button> 
+
+<button><a th:href="@{/client/modifier/{numeroClient}(numeroClient=${client.numeroClient})}" class="btn">Modifier</a> </button>
+
+<button><a th:href="@{/client/supprimer/{numeroClient}(numeroClient=${client.numeroClient})}" class="btn">Supprimer</a> </button>
+
+</body>
+</html>

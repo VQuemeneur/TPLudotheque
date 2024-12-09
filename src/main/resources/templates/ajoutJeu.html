@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajout d'un jeu</title>
+</head>
+<body>
+	<h1>La crypte du jeu</h1>
+	<div>
+		<h2>Formulaire d'ajout de jeu</h2>
+
+
+	</div>
+	<form action="/jeu/creer" method="post" th:object="${jeu}">
+		<div>
+			<label for="titre">Titre : </label> <input type="text"
+				th:field="*{titre}" id="titre">
+				 <span style="color: red;"
+				th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}">Erreur</span>
+		</div>
+		<br>
+		<div>
+			<label for="reference">Référence : </label> <input type="text"
+				th:field="*{reference}" id="reference">
+		</div>
+		<br>
+		<div>
+			<label for="description">Description : </label> <input type="text"
+				th:field="*{description}" id="description">
+		</div>
+		<br>
+		<div>
+			<label for="tarifJournee">Tarif à la journée : </label> <input
+				type="number" th:field="*{tarifJournee}" id="tarifJournee">
+		</div>
+		<br>
+		<div>
+			<label for="ageMin">Age mini : </label> <input type="number"
+				th:field="*{ageMin}" id="ageMin">
+		</div>
+		<br>
+		<div>
+			<label for="duree">Duree : </label> <input type="number"
+				th:field="*{duree}" id="duree">
+		</div>
+		<div>
+			<label for="genres">Genres :</label> <select th:field="*{genres}"
+				multiple size="5">
+				<option th:each="genre : ${@genreService.findAllGenres}"
+					th:value="${genre.numeroGenre}" th:text="${genre.libelle}"></option>
+			</select>
+		</div>
+
+
+		<button>Valider</button>
+	</form>
+	
+
+</body>
+</html>
