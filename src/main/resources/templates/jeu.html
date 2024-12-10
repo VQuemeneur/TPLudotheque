@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>Liste des jeux</title>
@@ -20,8 +20,12 @@
 		</table>
 	</div>
 	<br>
+	
+	 
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
 	<button>
-		<a th:href="@{/jeu/creer}" class="btn">Nouveau jeu</a>
+		<a  th:href="@{/jeu/creer}" class="btn">Nouveau jeu</a>
 	</button>
+	</div>
 </body>
 </html>

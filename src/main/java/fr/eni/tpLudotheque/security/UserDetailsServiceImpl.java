@@ -1,39 +1,48 @@
 package fr.eni.tpLudotheque.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
+
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import fr.eni.tpLudotheque.bo.Utilisateur;
+import fr.eni.tpLudotheque.services.UtilisateurService;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	private PasswordEncoder passwordEncoder;
 
-	public UserDetailsServiceImpl(PasswordEncoder passwordEncoder) {
+	private UtilisateurService utilisateurService;
+
+	public UserDetailsServiceImpl(PasswordEncoder passwordEncoder, UtilisateurService utilisateurService) {
 		super();
 		this.passwordEncoder = passwordEncoder;
+		this.utilisateurService = utilisateurService;
 	}
 
 	/*
 	 * Est appelée à chaque connexion utilisateur username : login saisi par
 	 * l'utilisateur
 	 */
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+
+		Optional<Utilisateur> utilOpt = utilisateurService.findUtilisateurByLogin(login);
 
 		UserDetails user = null;
-		
-		if ("bob".equals(username)) {
-			user = User.builder().username(username).password(passwordEncoder.encode("password")) // A aller chercher en
-																									// BD
-					.roles("USER", "ADMIN").build();
+
+		if (utilOpt.isPresent()) {
+			Utilisateur utilisateur = utilOpt.get();
+			user = User.builder().username(login).password(utilisateur.getPassword()).roles(utilisateur.getRole())
+					.build();
 			return user;
 		}
-		throw new UsernameNotFoundException(username + " not found.");
+
+		throw new UsernameNotFoundException(login + " not found.");
 	}
 
 }

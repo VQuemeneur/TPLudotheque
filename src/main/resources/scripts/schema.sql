@@ -99,3 +99,17 @@ ALTER TABLE IF EXISTS public.exemplaire
 GRANT ALL ON ALL TABLES IN SCHEMA public TO ludouser;
 GRANT ALL ON ALL TABLES IN SCHEMA public TO postgres;
 
+DROP TABLE IF EXISTS public.user;
+
+CREATE TABLE public.user (
+    id SERIAL PRIMARY KEY,                 -- Clé primaire auto-incrémentée
+    login VARCHAR(50) NOT NULL UNIQUE,     -- Login de l'utilisateur, doit être unique
+    password VARCHAR(255) NOT NULL,        -- Mot de passe encodé
+    role VARCHAR(50) NOT NULL              -- Rôle de l'utilisateur
+);
+
+-- Permissions
+ALTER TABLE public.user OWNER TO postgres;
+
+GRANT ALL ON TABLE public.user TO ludouser;
+GRANT ALL ON TABLE public.user TO postgres;

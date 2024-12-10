@@ -13,6 +13,7 @@ public class LudothequeAdviceController {
 
 	@ExceptionHandler(Exception.class)
 	public String handleException(Exception ex, Model modele) {
+		ex.printStackTrace();
 		logger.error(ex.getMessage());
 		
 		modele.addAttribute("body","erreur");
