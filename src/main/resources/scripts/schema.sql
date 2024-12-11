@@ -99,17 +99,24 @@ ALTER TABLE IF EXISTS public.exemplaire
 GRANT ALL ON ALL TABLES IN SCHEMA public TO ludouser;
 GRANT ALL ON ALL TABLES IN SCHEMA public TO postgres;
 
-DROP TABLE IF EXISTS public.user;
+DROP TABLE IF EXISTS public.utilisateur;
 
-CREATE TABLE public.user (
-    id SERIAL PRIMARY KEY,                 -- Clé primaire auto-incrémentée
-    login VARCHAR(50) NOT NULL UNIQUE,     -- Login de l'utilisateur, doit être unique
-    password VARCHAR(255) NOT NULL,        -- Mot de passe encodé
-    role VARCHAR(50) NOT NULL              -- Rôle de l'utilisateur
-);
 
--- Permissions
-ALTER TABLE public.user OWNER TO postgres;
+CREATE TABLE public.utilisateur
+(
+    id integer NOT NULL DEFAULT nextval('utilisateur_id_seq'::regclass),
+    login character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    password character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    role character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT utilisateur_pkey PRIMARY KEY (id),
+    CONSTRAINT utilisateur_login_key UNIQUE (login)
+)
 
-GRANT ALL ON TABLE public.user TO ludouser;
-GRANT ALL ON TABLE public.user TO postgres;
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.utilisateur
+    OWNER to postgres;
+
+GRANT ALL ON TABLE public.utilisateur TO ludouser;
+
+GRANT ALL ON TABLE public.utilisateur TO postgres;

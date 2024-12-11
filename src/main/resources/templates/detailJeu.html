@@ -42,13 +42,17 @@
 			<th>Exemplaires:</th>
 			<td>
 				<ul>
-					<li th:each="exemplaire : ${jeu.exemplaires}"><a
-						th:href="@{/jeu/{numeroJeu}/{numeroExemplaire}(numeroJeu=${jeu.numeroJeu}, numeroExemplaire=${exemplaire.numeroExemplaire})}">
-							<span
+					<li th:each="exemplaire : ${jeu.exemplaires}"><span
 							th:text="'Exemplaire ' + ${exemplaire.numeroExemplaire} + '  '"></span>
-					</a> <span th:if="${exemplaire.louable}" style="color: green;">Disponible</span>
+					
+					<span th:if="${exemplaire.louable}" style="color: green;">Disponible</span>
 						<span th:if="${!exemplaire.louable}" style="color: red;">Non
-							disponible</span></li>
+							disponible</span>
+							
+						<button  sec:authorize="hasRole('ROLE_ADMIN')">	<a 
+						th:href="@{/jeu/{numeroJeu}/{numeroExemplaire}(numeroJeu=${jeu.numeroJeu}, numeroExemplaire=${exemplaire.numeroExemplaire})}" class="btn">Modifier
+							
+					</a> </button></li>
 				</ul>
 			</td>
 		</tr>
