@@ -47,6 +47,7 @@ INSERT INTO client (nom, prenom, email, rue, codepostal, ville, telephone) VALUE
 ('Michel', 'Lucas', 'lucas.michel@example.com', '23 place de la Victoire', '80000', 'Amiens', '0765432198'),
 ('Roux', 'Alice', 'alice.roux@example.com', '101 rue Saint-Lazare', '34000', 'Montpellier', '0658901234');
 
+--mot de passe des 2 utilisateurs : password
 INSERT INTO users (id, username, password_hash, role) VALUES
 (1, 'bob', '{bcrypt}$2a$10$Sqcbmv4Qhfrk58wOayn6deukOJzBlMqWS6CqC8/Ew3Bw8F4An2.V.', 'ADMIN'),
 (2, 'doug', '{bcrypt}$2a$10$Sqcbmv4Qhfrk58wOayn6deukOJzBlMqWS6CqC8/Ew3Bw8F4An2.V.', 'USER');
