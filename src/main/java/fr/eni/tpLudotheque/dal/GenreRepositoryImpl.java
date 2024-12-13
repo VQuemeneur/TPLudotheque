@@ -10,8 +10,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.tpLudotheque.bo.Genre;
-import fr.eni.tpLudotheque.bo.Jeu;
-
 
 class GenreRowMapper implements RowMapper<Genre> {
 
@@ -19,32 +17,27 @@ class GenreRowMapper implements RowMapper<Genre> {
 	public Genre mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Genre genre = new Genre();
 		genre.setNumeroGenre(rs.getInt("numeroGenre"));
-		genre.setLibelle(rs.getString("libelle"));			
+		genre.setLibelle(rs.getString("libelle"));
 		return genre;
 	}
 
 }
-@Repository
-public class GenreRepositoryImpl implements GenreRepository{
 
+@Repository
+public class GenreRepositoryImpl implements GenreRepository {
 
 	private JdbcTemplate jdbcTemplate;
-	
-	
+
 	public GenreRepositoryImpl(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-
-
 	@Override
 	public List<Genre> findAllGenres() {
-		String sql = "select numeroGenre, libelle from genre";		
-		List<Genre> genres= jdbcTemplate.query(sql, new GenreRowMapper());
+		String sql = "select numeroGenre, libelle from genre";
+		List<Genre> genres = jdbcTemplate.query(sql, new GenreRowMapper());
 		return genres.stream().toList();
 	}
-
-
 
 	@Override
 	public Optional<Genre> getById(int genreId) {
@@ -52,10 +45,5 @@ public class GenreRepositoryImpl implements GenreRepository{
 		Genre genre = jdbcTemplate.queryForObject(sql, new GenreRowMapper(), genreId);
 		return Optional.ofNullable(genre);
 	}
-
-
-
-	
-	
 
 }

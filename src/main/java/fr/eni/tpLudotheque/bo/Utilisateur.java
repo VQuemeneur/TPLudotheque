@@ -7,10 +7,10 @@ public class Utilisateur {
 	String login;
 	String password;
 	String role;
-	
+
 	public Utilisateur() {
 		super();
-		
+
 	}
 
 	public Utilisateur(int utilisateurId, String login, String password, String role) {
@@ -77,5 +77,4 @@ public class Utilisateur {
 				&& Objects.equals(role, other.role) && utilisateurId == other.utilisateurId;
 	}
 
-	
 }

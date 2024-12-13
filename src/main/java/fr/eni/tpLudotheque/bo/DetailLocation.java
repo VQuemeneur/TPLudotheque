@@ -1,33 +1,36 @@
 package fr.eni.tpLudotheque.bo;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class DetailLocation {
-	int noLigne;
+	int numeroLigne;
 	LocalDate dateRetour;
 	double tarifLocation;
-	Jeu jeu;
-	
+	private Exemplaire exemplaire;
+	int numeroLocation;
+
 	public DetailLocation() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
-	public DetailLocation(int noLigne, LocalDate dateRetour, double tarifLocation, Jeu jeu) {
+	public DetailLocation(int numeroLigne, LocalDate dateRetour, double tarifLocation, Exemplaire exemplaire,
+			int numeroLocation) {
 		super();
-		this.noLigne = noLigne;
+		this.numeroLigne = numeroLigne;
 		this.dateRetour = dateRetour;
 		this.tarifLocation = tarifLocation;
-		this.jeu = jeu;
+		this.exemplaire = exemplaire;
+		this.numeroLocation = numeroLocation;
+
 	}
 
-	public int getNoLigne() {
-		return noLigne;
+	public int getNumeroLigne() {
+		return numeroLigne;
 	}
 
-	public void setNoLigne(int noLigne) {
-		this.noLigne = noLigne;
+	public void setNumeroLigne(int numeroLigne) {
+		this.numeroLigne = numeroLigne;
 	}
 
 	public LocalDate getDateRetour() {
@@ -46,38 +49,26 @@ public class DetailLocation {
 		this.tarifLocation = tarifLocation;
 	}
 
-	public Jeu getJeu() {
-		return jeu;
+	public Exemplaire getExemplaire() {
+		return exemplaire;
 	}
 
-	public void setJeu(Jeu jeu) {
-		this.jeu = jeu;
+	public void setExemplaire(Exemplaire exemplaire) {
+		this.exemplaire = exemplaire;
+	}
+
+	public int getNumeroLocation() {
+		return numeroLocation;
+	}
+
+	public void setNumeroLocation(int numeroLocation) {
+		this.numeroLocation = numeroLocation;
 	}
 
 	@Override
 	public String toString() {
-		return "DetailLocation [noLigne=" + noLigne + ", dateRetour=" + dateRetour + ", tarifLocation=" + tarifLocation
-				+ ", jeu=" + jeu + "]";
+		return "DetailLocation [noLigne=" + numeroLigne + ", dateRetour=" + dateRetour + ", tarifLocation="
+				+ tarifLocation + ", exemplaire=" + exemplaire + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(dateRetour, jeu, noLigne, tarifLocation);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DetailLocation other = (DetailLocation) obj;
-		return Objects.equals(dateRetour, other.dateRetour) && Objects.equals(jeu, other.jeu)
-				&& noLigne == other.noLigne
-				&& Double.doubleToLongBits(tarifLocation) == Double.doubleToLongBits(other.tarifLocation);
-	}
-	
-	
 }

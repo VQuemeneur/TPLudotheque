@@ -22,13 +22,12 @@ public class WebSecurityConfig {
 				.requestMatchers("/", "/login", "/images/*", "/chiffre").permitAll()
 
 				// Autoriser uniquement les ADMIN pour la gestion des jeux
-				.requestMatchers(HttpMethod.GET, "/jeu/creer", "/jeu/{numeroJeu}/ajouterExemplaire",
-						"/jeu/{numeroJeu}/{numeroExemplaire}")
-				.hasRole("ADMIN")
+				.requestMatchers(HttpMethod.GET, "/jeu/creer", "/jeu/{numeroJeu}/ajouterExemplaire").hasRole("ADMIN")
 
 				// Autoriser uniquement les USER pour la gestion des clients
 				.requestMatchers(HttpMethod.GET, "/ajoutClient", "/client/{numeroClient}",
-						"/client/modifier/{numeroClient}", "/client/supprimer/{numeroClient}")
+						"/client/modifier/{numeroClient}", "/client/supprimer/{numeroClient}",
+						"/client/{numeroClient}/location", "/jeu/{numeroJeu}", "/jeu/{numeroJeu}/{numeroExemplaire}")
 				.hasRole("USER")
 
 				.requestMatchers(HttpMethod.POST).authenticated().anyRequest().authenticated())

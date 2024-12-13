@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
 <title>Ajout d'un jeu</title>
@@ -14,8 +15,7 @@
 	<form action="/jeu/creer" method="post" th:object="${jeu}">
 		<div>
 			<label for="titre">Titre : </label> <input type="text"
-				th:field="*{titre}" id="titre">
-				 <span style="color: red;"
+				th:field="*{titre}" id="titre"> <span style="color: red;"
 				th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}">Erreur</span>
 		</div>
 		<br>
@@ -54,7 +54,7 @@
 
 		<button>Valider</button>
 	</form>
-	
+
 
 </body>
 </html>

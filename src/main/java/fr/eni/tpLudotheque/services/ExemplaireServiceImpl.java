@@ -34,6 +34,10 @@ public class ExemplaireServiceImpl implements ExemplaireService {
 		exemplaireRepo.update(exemplaire);
 	}
 
-}
+	@Override
+	public Exemplaire findExemplairetByCodebarre(String codebarre) {
+		Exemplaire exemplaire = exemplaireRepo.findExemplaireByCodebarre(codebarre);
+		return exemplaire;
+	}
 
- 
+}

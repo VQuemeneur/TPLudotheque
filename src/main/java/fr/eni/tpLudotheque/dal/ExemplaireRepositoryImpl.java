@@ -2,7 +2,6 @@ package fr.eni.tpLudotheque.dal;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import fr.eni.tpLudotheque.bo.Exemplaire;
 import fr.eni.tpLudotheque.exceptions.CodeBarreDejaExistantException;
@@ -46,21 +44,16 @@ public class ExemplaireRepositoryImpl implements ExemplaireRepository {
 
 	@Override
 
-	public void ajouterExemplaire(Exemplaire exemplaire) throws CodeBarreDejaExistantException{
+	public void ajouterExemplaire(Exemplaire exemplaire) throws CodeBarreDejaExistantException {
 		String sql = "INSERT INTO exemplaire (codebarre, louable, numeroJeu) VALUES(:codebarre, :louable, :jeu.numeroJeu)";
 
-		//int rows = namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(exemplaire));
-
-		//String sql = "INSERT INTO exemplaire (codebarre, louable, numeroJeu) VALUES (?, ?, ?) ";
 		try {
-		namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(exemplaire));
-	//jdbcTemplate.update(sql,  exemplaire.getCodebarre(), exemplaire.isLouable(), exemplaire.getNumeroJeu());
-		}catch(DuplicateKeyException duplicateKeyException) {
+			namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(exemplaire));
+
+		} catch (DuplicateKeyException duplicateKeyException) {
 			throw new CodeBarreDejaExistantException(duplicateKeyException);
 		}
 	}
-
-	
 
 	@Override
 	public Exemplaire findById(int numeroExemplaire) {
@@ -79,6 +72,13 @@ public class ExemplaireRepositoryImpl implements ExemplaireRepository {
 				exemplaire.getJeu().getNumeroJeu(), exemplaire.getNumeroExemplaire());
 
 	}
-	
+
+	// ajouter la recherche des jeux louables
+	@Override
+	public Exemplaire findExemplaireByCodebarre(String codebarre) {
+		String sql = "select numeroExemplaire, codebarre, louable, numeroJeu from exemplaire where codebarre = ?";
+		Exemplaire exemplaire = jdbcTemplate.queryForObject(sql, new ExemplaireRowMapper(), codebarre);
+		return exemplaire;
+	}
 
 }

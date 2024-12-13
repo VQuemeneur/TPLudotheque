@@ -2,17 +2,13 @@ package fr.eni.tpLudotheque.dal;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 
 import fr.eni.tpLudotheque.bo.Client;
 
@@ -37,9 +33,6 @@ class ClientRowMapper implements RowMapper<Client> {
 @Repository
 public class ClientRepositoryImpl implements ClientRepository {
 
-	// private static int numeroClient = 1;
-	// private List<Client> clients;
-	// private Client client;
 	private JdbcTemplate jdbcTemplate;
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -61,9 +54,9 @@ public class ClientRepositoryImpl implements ClientRepository {
 
 	@Override
 	public List<Client> findAllClients() {
-		String sql = "select numeroClient, nom, prenom, email, rue, codepostal, ville, telephone from client";		
+		String sql = "select numeroClient, nom, prenom, email, rue, codepostal, ville, telephone from client";
 		List<Client> clients = jdbcTemplate.query(sql, new ClientRowMapper());
-		
+
 		return clients;
 	}
 
@@ -74,50 +67,28 @@ public class ClientRepositoryImpl implements ClientRepository {
 		return client;
 	}
 
-
 	@Override
 	public void update(Client client) {
 		Client oldClient = findById(client.getNumeroClient());
-	
-       // BeanUtils.copyProperties(client, oldClient);
-		String sql = "UPDATE client "
-		           + "SET "
-		           + "    nom = ?, "
-		           + "    prenom = ?, "
-		           + "    email = ?, "
-		           + "    rue = ?, "
-		           + "    codePostal = ?, "
-		           + "    ville = ?, "
-		           + "    telephone = ? "
-		           + "WHERE "
-		           + "    numeroClient = ?;";
-		//oldClient =	jdbcTemplate.update(sql, client);
-		int rowsAffected = jdbcTemplate.update(sql,
-		        client.getNom(),
-		        client.getPrenom(),
-		        client.getEmail(),
-		        client.getRue(),
-		        client.getCodePostal(),
-		        client.getVille(),
-		        client.getTelephone(),
-		        client.getNumeroClient()
-		    );     
-       
+
+		String sql = "UPDATE client " + "SET " + "    nom = ?, " + "    prenom = ?, " + "    email = ?, "
+				+ "    rue = ?, " + "    codePostal = ?, " + "    ville = ?, " + "    telephone = ? " + "WHERE "
+				+ "    numeroClient = ?;";
+
+		int rowsAffected = jdbcTemplate.update(sql, client.getNom(), client.getPrenom(), client.getEmail(),
+				client.getRue(), client.getCodePostal(), client.getVille(), client.getTelephone(),
+				client.getNumeroClient());
+
 	}
 
 	@Override
 	public void delete(int numeroClient) {
 		Client client = findById(numeroClient);
-		System.out.println("numero du client "+ numeroClient);
+		System.out.println("numero du client " + numeroClient);
 		String sql = "DELETE FROM client WHERE numeroClient = ?";
-		//int rowsDeleted = jdbcTemplate.update(sql,numeroClient);
+
 		int nbRows = jdbcTemplate.update(sql, numeroClient);
-		
-		
-		
-	}
-	
 
-	
 	}
 
+}

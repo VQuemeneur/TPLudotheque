@@ -43,36 +43,38 @@
 			<td>
 				<ul>
 					<li th:each="exemplaire : ${jeu.exemplaires}"><span
-							th:text="'Exemplaire ' + ${exemplaire.numeroExemplaire} + '  '"></span>
-					
-					<span th:if="${exemplaire.louable}" style="color: green;">Disponible</span>
+						th:text="'Exemplaire ' + ${exemplaire.numeroExemplaire} + '  '"></span>
+
+						<span th:if="${exemplaire.louable}" style="color: green;">Disponible</span>
 						<span th:if="${!exemplaire.louable}" style="color: red;">Non
 							disponible</span>
-							
-						<button  sec:authorize="hasRole('ROLE_ADMIN')">	<a 
-						th:href="@{/jeu/{numeroJeu}/{numeroExemplaire}(numeroJeu=${jeu.numeroJeu}, numeroExemplaire=${exemplaire.numeroExemplaire})}" class="btn">Modifier
-							
-					</a> </button></li>
+
+						<button>
+							<a
+								th:href="@{/jeu/{numeroJeu}/{numeroExemplaire}(numeroJeu=${jeu.numeroJeu}, numeroExemplaire=${exemplaire.numeroExemplaire})}"
+								class="btn">Modifier </a>
+						</li>
 				</ul>
 			</td>
 		</tr>
 
 	</table>
-	<button>
-		<a th:href="@{/jeu}" class="btn">Accueil Jeux</a>
-	</button>
+	
+	
 	<div sec:authorize="hasRole('ROLE_ADMIN')">
-		<button>
-			<a th:href="@{/jeu/modifier/{numeroJeu}(numeroJeu=${jeu.numeroJeu})}"
-				class="btn">Modifier</a>
-		</button>
+		
 
 		<button>
-			<a	th:href="@{/jeu/{numeroJeu}/ajouterExemplaire(numeroJeu=${jeu.numeroJeu})}"
+			<a
+				th:href="@{/jeu/{numeroJeu}/ajouterExemplaire(numeroJeu=${jeu.numeroJeu})}"
 				class="btn">Ajouter un exemplaire</a>
 		</button>
 
-		<button>Supprimer</button>
+		
 	</div>
+	<br><br>
+	<button>
+		<a th:href="@{/jeu}" class="btn">Accueil Jeux</a>
+	</button>
 </body>
 </html>

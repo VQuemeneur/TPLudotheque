@@ -8,22 +8,18 @@ import fr.eni.tpLudotheque.bo.Genre;
 import fr.eni.tpLudotheque.dal.GenreRepository;
 
 @Service("genreService")
-public class GenreServiceImpl implements GenreService{
-	
+public class GenreServiceImpl implements GenreService {
+
 	private GenreRepository genreRepo;
-	
-	
 
 	public GenreServiceImpl(GenreRepository genreRepo) {
 		super();
 		this.genreRepo = genreRepo;
 	}
 
-
-
 	@Override
 	public List<Genre> findAllGenres() {
-		// TODO Auto-generated method stub
+
 		return genreRepo.findAllGenres();
 	}
 

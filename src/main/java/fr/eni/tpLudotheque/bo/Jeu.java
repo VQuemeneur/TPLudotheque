@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class Jeu {
-	
+
 	private int numeroJeu;
 	@NotBlank
 	private String titre;
@@ -20,16 +19,16 @@ public class Jeu {
 	private double tarifJournee;
 	private int ageMin;
 	private int duree;
-	
+
 	private List<Genre> genres;
 	private List<Exemplaire> exemplaires;
-	
+
 	public Jeu() {
 		super();
-		genres=new ArrayList<>();
-		exemplaires= new ArrayList<>();
+		genres = new ArrayList<>();
+		exemplaires = new ArrayList<>();
 	}
-	
+
 	public Jeu(Integer numeroJeu) {
 		this();
 		this.numeroJeu = numeroJeu;
@@ -53,71 +52,57 @@ public class Jeu {
 		return numeroJeu;
 	}
 
-
 	public void setNumeroJeu(int numeroJeu) {
 		this.numeroJeu = numeroJeu;
 	}
-
 
 	public String getTitre() {
 		return titre;
 	}
 
-
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
-
 
 	public String getReference() {
 		return reference;
 	}
 
-
 	public void setReference(String reference) {
 		this.reference = reference;
 	}
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 
 	public double getTarifJournee() {
 		return tarifJournee;
 	}
 
-
 	public void setTarifJournee(double tarifJournee) {
 		this.tarifJournee = tarifJournee;
 	}
-
 
 	public int getAgeMin() {
 		return ageMin;
 	}
 
-
 	public void setAgeMin(int ageMin) {
 		this.ageMin = ageMin;
 	}
-
 
 	public int getDuree() {
 		return duree;
 	}
 
-
 	public void setDuree(int duree) {
 		this.duree = duree;
 	}
-
 
 	public List<Genre> getGenres() {
 		return genres;
@@ -131,11 +116,10 @@ public class Jeu {
 		this.genres = genres;
 	}
 
-
 	public List<Exemplaire> getExemplaires() {
 		return exemplaires;
 	}
-	
+
 	public void addExemplaire(Exemplaire exemplaire) {
 		this.exemplaires.add(exemplaire);
 	}
@@ -151,12 +135,10 @@ public class Jeu {
 				+ ", genres=" + genres + "]";
 	}
 
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(ageMin, description, duree, genres, numeroJeu, reference, tarifJournee, titre);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -174,6 +156,4 @@ public class Jeu {
 				&& Objects.equals(titre, other.titre);
 	}
 
-
-	
 }

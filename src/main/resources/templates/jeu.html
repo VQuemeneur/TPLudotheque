@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>Liste des jeux</title>
@@ -8,23 +9,25 @@
 	<div>
 		<h2>Liste des jeux</h2>
 		<table>
-<th>Titre</th><th>Durée</th>
+			<th>Titre</th>
+			<th>Durée</th>
 			<tr th:each="jeu : ${jeux}">
-			
+
 				<td><a
 					th:href="@{/jeu/{numeroJeu}(numeroJeu=${jeu.numeroJeu})}"
 					th:text="${jeu.titre}"></a></td>
-						
+
 				<td th:text="${jeu.duree}"></td>
 			</tr>
 		</table>
 	</div>
 	<br>
-	
-	 
 	<div sec:authorize="hasRole('ROLE_ADMIN')">
-	<button>
-		<a  th:href="@{/jeu/creer}" class="btn">Nouveau jeu</a>
+		<button>
+			<a th:href="@{/jeu/creer}" class="btn">Nouveau jeu</a>
+		</button>
+		<button>
+		<a th:href="@{/}" class="btn">Accueil</a>
 	</button>
 	</div>
 </body>

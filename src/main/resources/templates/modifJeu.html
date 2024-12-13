@@ -1,46 +1,48 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
 <title>La crypte du jeu</title>
 </head>
 <body>
-<h2>Modifier le jeu</h2>
-	<form th:action="@{/jeu/modifier/{numeroJeu}(numeroJeu=${jeu.numeroJeu})}" method="post" th:object="${jeu}">
-		
-					<div>
-				<label for="titre">Titre : </label> <input type="text" th:field="*{titre}"
-					id="titre">
-			</div>
-			<br>
-			<div>
-				<label for="reference">Référence : </label> <input type="text"
-					th:field="*{reference}" id="reference">
-			</div>
-			<br>
-			<div>
-				<label for="description">Description : </label> <input type="text"
-					th:field="*{description}" id="description">
-			</div>
-			<br>
-			<div>
-				<label for="tarifJournee">Tarif à la journée : </label> <input type="number" th:field="*{tarifJournee}"
-					id="tarifJournee">
-			</div>
-			<br>
-			<div>
-				<label for="ageMin">Age mini : </label> <input type="number"
-					th:field="*{ageMin}" id="ageMin">
-			</div>
-			<br>
-			<div>
-				<label for="duree">Duree : </label> <input type="number"
-					th:field="*{duree}" id="duree">
-			</div>
-			
-			
-		<button th:href="@{/jeu/{numeroJeu}(numeroJeu=${jeu.numeroJeu})}" type="submit">Modifier</button>
+	<h2>Modifier le jeu</h2>
+	<form
+		th:action="@{/jeu/modifier/{numeroJeu}(numeroJeu=${jeu.numeroJeu})}"
+		method="post" th:object="${jeu}">
+
+		<div>
+			<label for="titre">Titre : </label> <input type="text"
+				th:field="*{titre}" id="titre">
+		</div>
+		<br>
+		<div>
+			<label for="reference">Référence : </label> <input type="text"
+				th:field="*{reference}" id="reference">
+		</div>
+		<br>
+		<div>
+			<label for="description">Description : </label> <input type="text"
+				th:field="*{description}" id="description">
+		</div>
+		<br>
+		<div>
+			<label for="tarifJournee">Tarif à la journée : </label> <input
+				type="number" th:field="*{tarifJournee}" id="tarifJournee">
+		</div>
+		<br>
+		<div>
+			<label for="ageMin">Age mini : </label> <input type="number"
+				th:field="*{ageMin}" id="ageMin">
+		</div>
+		<br>
+		<div>
+			<label for="duree">Duree : </label> <input type="number"
+				th:field="*{duree}" id="duree">
+		</div>
 
 
+		<button th:href="@{/jeu/{numeroJeu}(numeroJeu=${jeu.numeroJeu})}"
+			type="submit">Modifier</button>
 </body>
 </html>

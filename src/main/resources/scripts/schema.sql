@@ -120,3 +120,54 @@ ALTER TABLE IF EXISTS public.utilisateur
 GRANT ALL ON TABLE public.utilisateur TO ludouser;
 
 GRANT ALL ON TABLE public.utilisateur TO postgres;
+
+
+CREATE TABLE IF NOT EXISTS public.location
+(
+    numerolocation integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    datedebutlocation date NOT NULL,
+    paye boolean,
+    prixtotal numeric,
+    numeroclient integer,
+    CONSTRAINT location_pkey PRIMARY KEY (numerolocation),
+    CONSTRAINT numeroclient FOREIGN KEY (numeroclient)
+        REFERENCES public.client (numeroclient) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.location
+    OWNER to postgres;
+
+GRANT ALL ON TABLE public.location TO ludouser;
+
+GRANT ALL ON TABLE public.location TO postgres;
+
+CREATE TABLE IF NOT EXISTS public.detail_location
+(
+    numeroligne integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    dateretour date,
+    tariflocation numeric,
+    numeroexemplaire integer,
+    numerolocation integer,
+    CONSTRAINT detail_location_pkey PRIMARY KEY (numeroligne),
+    CONSTRAINT numeroexemplaire FOREIGN KEY (numeroexemplaire)
+        REFERENCES public.exemplaire (numeroexemplaire) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT numerolocation FOREIGN KEY (numerolocation)
+        REFERENCES public.location (numerolocation) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.detail_location
+    OWNER to postgres;
+
+GRANT ALL ON TABLE public.detail_location TO ludouser;
+
+GRANT ALL ON TABLE public.detail_location TO postgres;

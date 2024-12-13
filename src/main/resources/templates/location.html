@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="UTF-8">
+<title>Location</title>
+</head>
+<body>
+	<h1>Location de jeux</h1>
+
+	<h2>Formulaire de location</h2>
+
+	<div sec:authorize="hasRole('ROLE_USER')">
+
+		<form
+			th:action="@{/client/{numeroClient}/location(numeroClient=${numeroClient})}"
+			method="post" th:object="${location}">
+			<div>
+				<label for="nom">Nom du client : </label>
+				<!-- Afficher le nom du client dans un champ non modifiable -->
+				<input type="text" th:field="*{client.nom}" id="nom" readonly>
+			</div>
+			<br>
+			<div>
+				<label for="dateDebutLocation">Date : </label>
+				<!-- Champ de date avec calendrier -->
+				<input type="date" th:field="*{dateDebutLocation}"
+					id="dateDebutLocation" required>
+			</div>
+
+			<br>
+			<div>
+				<label for="paye">Payé : </label> <input type="radio" id="paye-oui"
+					name="paye" th:field="*{paye}" value="true" /> <label
+					for="paye-oui">Oui</label> <input type="radio" id="paye-non"
+					name="paye" th:field="*{paye}" value="false" /> <label
+					for="paye-non">Non</label>
+			</div>
+			<br>
+			<div>
+
+				<label for="codebarre">Code Barre de l'exemplaire :</label> <input
+					type="text" name="codebarre" id="codebarre" required />
+			</div>
+
+			<br> <br>
+
+			<button>Valider</button>
+		</form>
+
+	</div>
+</body>
+</html>

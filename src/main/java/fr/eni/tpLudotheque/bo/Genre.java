@@ -5,21 +5,17 @@ import java.util.Objects;
 public class Genre {
 	private int numeroGenre;
 	private String libelle;
-	
+
 	public Genre() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
-	
-	
 
 	public Genre(int numeroGenre, String libelle) {
 		super();
 		this.numeroGenre = numeroGenre;
 		this.libelle = libelle;
 	}
-
-
 
 	public int getNumeroGenre() {
 		return numeroGenre;

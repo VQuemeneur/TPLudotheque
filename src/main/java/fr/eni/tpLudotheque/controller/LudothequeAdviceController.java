@@ -15,8 +15,8 @@ public class LudothequeAdviceController {
 	public String handleException(Exception ex, Model modele) {
 		ex.printStackTrace();
 		logger.error(ex.getMessage());
-		
-		modele.addAttribute("body","erreur");
+
+		modele.addAttribute("body", "erreur");
 
 		return "formulaire";
 	}

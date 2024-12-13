@@ -20,7 +20,8 @@ public class LoginController {
 	
 		return "login";
 	}
-
+	//Méthode utilisée uniquement pour récupérer le chiffrage du mot de passe pour l'enregistrer en bdd
+	//Ne pas mettre en prod
 	@GetMapping("/chiffre")
 	public String chiffre() {
 		System.out.println( passwordEncoder.encode("password"));

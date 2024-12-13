@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import fr.eni.tpLudotheque.bo.Client;
 import fr.eni.tpLudotheque.bo.Exemplaire;
 import fr.eni.tpLudotheque.bo.Jeu;
 import fr.eni.tpLudotheque.exceptions.CodeBarreDejaExistantException;
@@ -43,13 +42,13 @@ public class ExemplaireController {
 	@PostMapping("/jeu/{numeroJeu}/ajouterExemplaire")
 	public String ajouterExemplaire(@PathVariable("numeroJeu") int numeroJeu, @Valid Exemplaire exemplaire,
 			BindingResult resultat, Model modele, RedirectAttributes redirectAttr) {
-		
+
 		// Vérification des erreurs de validation
 		if (resultat.hasErrors()) {
 			modele.addAttribute("org.springframework.validation.BindingResult.exemplaire", resultat);
 			modele.addAttribute("exemplaire", exemplaire);
 			return "ajoutExemplaire";
-		}		
+		}
 		try {
 			exemplaireService.ajouterExemplaire(exemplaire);
 		} catch (CodeBarreDejaExistantException e) {
@@ -58,7 +57,7 @@ public class ExemplaireController {
 		}
 		System.out.println("exemplaire ajouté " + exemplaire.toString());
 		return "redirect:/jeu/" + exemplaire.getNumeroJeu();
-		
+
 	}
 
 	@GetMapping("/jeu/{numeroJeu}/{numeroExemplaire}")

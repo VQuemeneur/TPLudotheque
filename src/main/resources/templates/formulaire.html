@@ -18,9 +18,11 @@
 					<button type="submit">Se déconnecter</button>
 				</form>
 				<br>
-				
-					<button ><a th:href="@{/jeu}" class="btn">Liste des jeux</a></button>
-				
+
+				<button>
+					<a th:href="@{/jeu}" class="btn">Liste des jeux</a>
+				</button>
+
 			</div>
 
 			<!-- Si l'utilisateur n'est pas connecté -->
@@ -33,7 +35,8 @@
 
 
 		<div sec:authorize="hasRole('ROLE_USER')">
-			<h2>Liste des clients enregistrés avec leur numéro de client</h2>
+			<h2>Liste des clients</h2>
+			<h3>Cliquer sur le client pour créer une location ou modifier sa fiche</h3>
 			<table>
 				<tr th:each="client : ${clients}">
 					<td th:text="${client.numeroClient}"></td>

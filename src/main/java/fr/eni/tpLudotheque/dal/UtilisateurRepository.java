@@ -6,7 +6,6 @@ import fr.eni.tpLudotheque.bo.Utilisateur;
 
 public interface UtilisateurRepository {
 
-	
 	Optional<Utilisateur> findUtilisateurByLogin(String login);
 
 }

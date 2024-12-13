@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import fr.eni.tpLudotheque.bo.Utilisateur;
 
-
 @Repository
 public class UtilisateurRepositoryImpl implements UtilisateurRepository {
 
@@ -19,7 +18,6 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	
 	@Override
 	public Optional<Utilisateur> findUtilisateurByLogin(String login) {
 		String sql = "select id, login, password, role from utilisateur where login=?";

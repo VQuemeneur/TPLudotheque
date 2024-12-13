@@ -1,6 +1,5 @@
 package fr.eni.tpLudotheque.dal;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -19,11 +18,9 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.eni.tpLudotheque.bo.Client;
 import fr.eni.tpLudotheque.bo.Exemplaire;
 import fr.eni.tpLudotheque.bo.Genre;
 import fr.eni.tpLudotheque.bo.Jeu;
-import jakarta.validation.Valid;
 
 class JeuRowMapper implements RowMapper<Jeu> {
 
@@ -76,10 +73,10 @@ public class JeuRepositoryImpl implements JeuRepository {
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(newJeu), keyHolder,
-				new String[] {"numerojeu"});
-		Integer cleJeu = keyHolder.getKeyAs(Integer.class);	
+				new String[] { "numerojeu" });
+		Integer cleJeu = keyHolder.getKeyAs(Integer.class);
 		logger.debug("apres insert into jeux...cleJeu=" + cleJeu);
-		
+
 		List<JeuGenreDto> jeuGenreDtos = newJeu.getGenres().stream()
 				.map(genre -> new JeuGenreDto(cleJeu, genre.getNumeroGenre())).toList();
 
@@ -100,16 +97,14 @@ public class JeuRepositoryImpl implements JeuRepository {
 		List<Exemplaire> exemplaires = getExemplairesByNoJeu(jeu.getNumeroJeu());
 		jeu.setExemplaires(exemplaires);
 		return jeu;
-		
+
 	}
 
-
-	
 	private List<Exemplaire> getExemplairesByNoJeu(int numeroJeu) {
-		String sql = "select numeroExemplaire, codebarre, louable, numeroJeu "
-				+ " from exemplaire "
+		String sql = "select numeroExemplaire, codebarre, louable, numeroJeu " + " from exemplaire "
 				+ " where numeroJeu = ? ";
-		List<Exemplaire> exemplaires = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Exemplaire.class), numeroJeu);
+		List<Exemplaire> exemplaires = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Exemplaire.class),
+				numeroJeu);
 		return exemplaires;
 	}
 

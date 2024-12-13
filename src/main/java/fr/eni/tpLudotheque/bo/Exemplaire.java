@@ -7,14 +7,12 @@ import jakarta.validation.constraints.Size;
 
 public class Exemplaire {
 	private int numeroExemplaire;
-	
 	@Size(min = 13, max = 13, message = "Le codebarre doit contenir exactement 13 caractères")
 	@NotNull
 	private String codebarre;
 	private boolean louable;
-
 	private Jeu jeu;
-
+	
 	public Exemplaire() {
 		super();
 		this.jeu = new Jeu();

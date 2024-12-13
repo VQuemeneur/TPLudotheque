@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
 <title>Ajout d'un exemplaire</title>
@@ -9,19 +10,18 @@
 	<div>
 		<h2>Formulaire d'ajout d'exemplaire de jeu</h2>
 	</div>
-	
-	    <!-- Affichage des messages globaux -->
-   
-    <span th:text="${erreur}" style="color:red"></span>
-	<form th:action="@{/jeu/{numeroJeu}/ajouterExemplaire(numeroJeu=${numeroJeu})}"
-	 method="post"
-		th:object="${exemplaire}">
+
+	<!-- Affichage des messages globaux -->
+
+	<span th:text="${erreur}" style="color: red"></span>
+	<form
+		th:action="@{/jeu/{numeroJeu}/ajouterExemplaire(numeroJeu=${numeroJeu})}"
+		method="post" th:object="${exemplaire}">
 		<div>
 			<label for="codebarre">Code Barre : </label> <input type="text"
 				th:field="*{codebarre}" id="codebarre">
-				 
 		</div>
-		<br>
+		<br> <br>
 		<div>
 
 			<label for="louable">Disponibilité :</label><br> <input
@@ -31,9 +31,6 @@
 				value="false" /> <label for="louable-non">Non</label>
 		</div>
 		<br>
-		
-
-
 		<button>Valider</button>
 	</form>
 </body>

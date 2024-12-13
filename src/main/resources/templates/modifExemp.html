@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Modifier exemplaire</title>
+<meta charset="UTF-8">
+<title>Modifier exemplaire</title>
 </head>
 <body>
-    <h2>Modifier exemplaire</h2>
+	<h2>Modifier exemplaire</h2>
 
-    <form th:action="@{/jeu/{numeroJeu}/{numeroExemplaire} (numeroJeu=${jeu.numeroJeu}, numeroExemplaire=${exemplaire.numeroExemplaire})}" 
-          method="post" 
-          th:object="${exemplaire}">
-        <div>
-            <label for="codebarre">Code Barre :</label>
-            <input type="text" th:field="*{codebarre}" id="codebarre">
-            <span style="color: red;" th:if="${#fields.hasErrors('codebarre')}" th:errors="*{codebarre}">Erreur</span>
-        </div>
-        <br>
-        <div>
-            <label for="louable">Disponibilité :</label><br>
-            <input type="radio" id="louable-oui" name="louable" th:field="*{louable}" value="true">
-            <label for="louable-oui">Oui</label>
-            <input type="radio" id="louable-non" name="louable" th:field="*{louable}" value="false">
-            <label for="louable-non">Non</label>
-        </div>
-        <br>
-        <button type="submit">Modifier</button>
-        <a th:href="@{/jeu/{numeroJeu} (numeroJeu=${jeu.numeroJeu})}">Annuler</a>
-    </form>
+	<form
+		th:action="@{/jeu/{numeroJeu}/{numeroExemplaire} (numeroJeu=${jeu.numeroJeu}, numeroExemplaire=${exemplaire.numeroExemplaire})}"
+		method="post" th:object="${exemplaire}">
+		<div>
+			<label for="codebarre">Code Barre :</label> <input type="text"
+				th:field="*{codebarre}" id="codebarre"> <span
+				style="color: red;" th:if="${#fields.hasErrors('codebarre')}"
+				th:errors="*{codebarre}">Erreur</span>
+		</div>
+		<br>
+		<div>
+			<label for="louable">Disponibilité :</label><br> <input
+				type="radio" id="louable-oui" name="louable" th:field="*{louable}"
+				value="true"> <label for="louable-oui">Oui</label> <input
+				type="radio" id="louable-non" name="louable" th:field="*{louable}"
+				value="false"> <label for="louable-non">Non</label>
+		</div>
+		<br>
+		<button type="submit">Modifier</button>
+		<a th:href="@{/jeu/{numeroJeu} (numeroJeu=${jeu.numeroJeu})}">Annuler</a>
+	</form>
 </body>
 </html>

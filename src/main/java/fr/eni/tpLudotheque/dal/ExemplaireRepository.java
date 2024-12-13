@@ -11,6 +11,8 @@ public interface ExemplaireRepository {
 
 	void update(Exemplaire exemplaire);
 
+	Exemplaire findExemplaireByCodebarre(String codebarre);
+
 //	boolean isCodebarreUnique(Exemplaire exemplaire);
 
 }

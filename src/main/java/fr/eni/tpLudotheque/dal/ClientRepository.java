@@ -7,7 +7,7 @@ import fr.eni.tpLudotheque.bo.Client;
 public interface ClientRepository {
 
 	void ajouterClient(Client client);
-	
+
 	public List<Client> findAllClients();
 
 	Client findById(Integer numeroClient);
